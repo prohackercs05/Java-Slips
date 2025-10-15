@@ -1,0 +1,23 @@
+class Employee { 
+    int Empid; 
+    String Empname; 
+    String Empdesignation; 
+    double Empsal; 
+ 
+    Employee(int id, String name, String designation, double sal) { 
+        this.Empid = id; 
+        this.Empname = name; 
+        this.Empdesignation = designation; 
+        this.Empsal = sal; 
+    } 
+ 
+    public String toString() { 
+        return "Empid: " + Empid + ", Empname: " + Empname + ", Empdesignation: " + 
+Empdesignation + ", Empsal: " + Empsal; 
+    } 
+     
+    public static void main(String[] args) { 
+        Employee emp = new Employee(101, "Alice", "Manager", 75000); 
+        System.out.println(emp); 
+    } 
+}
