@@ -1,0 +1,62 @@
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import javax.swing.*; 
+public class MouseEventScreen extends JFrame implements MouseListener, 
+MouseMotionListener { 
+    private JLabel mouseStatusLabel; 
+    private JTextField mouseClickField; 
+    public MouseEventScreen() { 
+        setTitle("Mouse Event Handler"); 
+        setSize(400, 200); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20)); 
+      mouseStatusLabel = new JLabel("Move the mouse to see its position."); 
+        mouseStatusLabel.setFont(new Font("Arial", Font.PLAIN, 14)); 
+                mouseClickField = new JTextField("Click inside the window to see coordinates here.", 25); 
+        mouseClickField.setEditable(false); 
+        mouseClickField.setHorizontalAlignment(JTextField.CENTER); 
+        mouseClickField.setFont(new Font("Arial", Font.BOLD, 14)); 
+  
+    add(mouseStatusLabel); 
+        add(mouseClickField); 
+   addMouseListener(this); 
+        addMouseMotionListener(this); 
+        setLocationRelativeTo(null); 
+        setVisible(true); 
+    } 
+    @Override 
+    public void mouseClicked(MouseEvent e) { 
+        String position = String.format("Mouse Clicked at: (%d, %d)", e.getX(), e.getY()); 
+        mouseClickField.setText(position); 
+    } 
+    @Override 
+    public void mouseMoved(MouseEvent e) { 
+        String position = String.format("Current Mouse Position: (%d, %d)", e.getX(),e.getY()); 
+        mouseStatusLabel.setText(position); 
+    } 
+    @Override 
+    public void mousePressed(MouseEvent e) { 
+        // Not used 
+    } 
+    @Override 
+    public void mouseReleased(MouseEvent e) { 
+        // Not used 
+    } 
+    @Override 
+    public void mouseEntered(MouseEvent e) { 
+        // Not used 
+    } 
+    @Override 
+    public void mouseExited(MouseEvent e) { 
+        // Not used 
+    } 
+    @Override 
+    public void mouseDragged(MouseEvent e) { 
+        // Not used 
+    } 
+   public static void main(String[] args) { 
+        SwingUtilities.invokeLater(MouseEventScreen::new); 
+    } 
+}
