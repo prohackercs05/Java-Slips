@@ -1,0 +1,60 @@
+•Student information class
+
+package student; 
+ public class StudentInfo { 
+    public void display(int rollno, String name, String sClass, double percentage) { 
+        System.out.println("\n--- Student Information ---"); 
+        System.out.println("Roll No: " + rollno); 
+        System.out.println("Name: " + name); 
+        System.out.println("Class: " + sClass); 
+        System.out.printf("Percentage: %.2f%%\n", percentage); 
+    } 
+} 
+
+•Student Percentage Class
+
+package student; 
+public class StudentPer { 
+    public double findPercentage(int[] marks) { 
+        int totalMarks = 0; 
+        for (int mark : marks) { 
+            totalMarks += mark; 
+        } 
+        return (double) totalMarks / marks.length; 
+    } 
+} 
+
+•Main Class
+
+import student.StudentInfo; 
+import student.StudentPer; 
+import java.util.Scanner; 
+ 
+public class TestStudent { 
+    public static void main(String[] args) { 
+        Scanner scanner = new Scanner(System.in); 
+ 
+        System.out.print("Enter Roll No: "); 
+        int rollno = scanner.nextInt(); 
+        scanner.nextLine();  
+ 
+        System.out.print("Enter Name: "); 
+        String name = scanner.nextLine(); 
+ 
+        System.out.print("Enter Class: "); 
+        String sClass = scanner.nextLine(); 
+ 
+        int[] marks = new int[6]; 
+        System.out.println("Enter marks for 6 subjects (out of 100):"); 
+        for (int i = 0; i < 6; i++) { 
+            System.out.print("Subject " + (i + 1) + ": "); 
+            marks[i] = scanner.nextInt(); 
+        } 
+ 
+        StudentPer studentPer = new StudentPer(); 
+        double percentage = studentPer.findPercentage(marks); 
+        StudentInfo studentInfo = new StudentInfo(); 
+        studentInfo.display(rollno, name, sClass, percentage); 
+        scanner.close(); 
+    } 
+} 
