@@ -1,0 +1,23 @@
+interface Operation { 
+    float PI = 3.142f; 
+    void volume(); 
+} 
+ 
+class Cylinder implements Operation { 
+    double radius, height; 
+    Cylinder(double r, double h) { 
+        radius = r; 
+        height = h; 
+    } 
+    public void volume() { 
+        double v = PI * radius * radius * height; 
+        System.out.println("The volume of cylinder is " + v); 
+    } 
+} 
+ 
+class Main { 
+    public static void main(String args[]) { 
+        Cylinder c1 = new Cylinder(5, 10); 
+        c1.volume(); 
+    } 
+}
