@@ -1,0 +1,63 @@
+import java.util.Scanner; 
+  
+class CricketPlayer { 
+    String name; 
+    int no_of_innings; 
+    int no_of_times_notout; 
+    int totalruns; 
+    double bat_avg; 
+ 
+    CricketPlayer(String name, int no_of_innings, int no_of_times_notout, int totalruns) { 
+        this.name = name; 
+        this.no_of_innings = no_of_innings; 
+        this.no_of_times_notout = no_of_times_notout; 
+        this.totalruns = totalruns; 
+        this.bat_avg = 0.0; 
+    } 
+ 
+    static void avg(CricketPlayer[] arr) { 
+        for (CricketPlayer p : arr) { 
+            int denominator = p.no_of_innings - p.no_of_times_notout; 
+            if (denominator > 0) 
+                p.bat_avg = (double) p.totalruns / denominator; 
+            else 
+                p.bat_avg = 0.0; 
+        } 
+    } 
+ 
+    static void sort(CricketPlayer[] arr) { 
+        int n = arr.length; 
+        for(int i=0; i<n-1; i++) { 
+            for(int j=0; j<n-i-1; j++) { 
+                if(arr[j].bat_avg < arr[j+1].bat_avg) { 
+                    CricketPlayer temp = arr[j]; 
+                    arr[j] = arr[j+1]; 
+                    arr[j+1] = temp; 
+                } 
+            } 
+        } 
+    } 
+ 
+    void display() { 
+        System.out.println(name + " " + no_of_innings + " " + no_of_times_notout + " " + 
+totalruns + " " + bat_avg); 
+    } 
+ 
+    public static void main(String[] args) {  
+        Scanner sc = new Scanner(System.in); 
+        int n = sc.nextInt(); 
+        CricketPlayer[] arr = new CricketPlayer[n]; 
+        for(int i=0; i<n; i++) { 
+            String name = sc.next(); 
+            int no_of_innings = sc.nextInt(); 
+            int no_of_times_notout = sc.nextInt(); 
+            int totalruns = sc.nextInt(); 
+            arr[i] = new CricketPlayer(name, no_of_innings, no_of_times_notout, totalruns); 
+        } 
+        avg(arr); 
+        sort(arr); 
+        for(CricketPlayer p : arr) { 
+            p.display(); 
+        } 
+    } 
+}
