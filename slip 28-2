@@ -1,0 +1,49 @@
+import java.awt.*; 
+import javax.swing.*; 
+ 
+public class SwingTemperatureConverter extends JFrame { 
+    private JTextField tfCelsius, tfFahrenheit; 
+ 
+    public SwingTemperatureConverter() { 
+        Container cp = getContentPane(); 
+        cp.setLayout(new GridLayout(2, 2, 5, 5)); 
+ 
+        cp.add(new JLabel("Celsius: ")); 
+        tfCelsius = new JTextField(); 
+        cp.add(tfCelsius); 
+ 
+
+        cp.add(new JLabel("Fahrenheit: ")); 
+        tfFahrenheit = new JTextField(); 
+        cp.add(tfFahrenheit); 
+ 
+        tfCelsius.addActionListener(e -> { 
+            try { 
+                double celsius = Double.parseDouble(tfCelsius.getText()); 
+                double fahrenheit = celsius * 9.0 / 5.0 + 32.0; 
+                tfFahrenheit.setText(String.format("%.1f", fahrenheit)); 
+            } catch (NumberFormatException ex) { 
+                tfFahrenheit.setText("Invalid Input"); 
+            } 
+        }); 
+ 
+        tfFahrenheit.addActionListener(e -> { 
+            try { 
+                double fahrenheit = Double.parseDouble(tfFahrenheit.getText()); 
+                double celsius = (fahrenheit - 32.0) * 5.0 / 9.0; 
+                tfCelsius.setText(String.format("%.1f", celsius)); 
+            } catch (NumberFormatException ex) { 
+                tfCelsius.setText("Invalid Input"); 
+            } 
+        }); 
+ 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setTitle("Temperature Converter"); 
+        setSize(300, 100); 
+        setVisible(true); 
+    } 
+ 
+    public static void main(String[] args) { 
+        SwingUtilities.invokeLater(SwingTemperatureConverter::new); 
+    } 
+}
