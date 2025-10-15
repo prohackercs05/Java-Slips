@@ -1,0 +1,63 @@
+import java.util.Scanner; 
+ 
+class Customer { 
+    int custno; 
+    String custname; 
+    String contactnumber; 
+    String custaddr; 
+ 
+    Customer(int custno, String custname, String contactnumber, String custaddr) { 
+        this.custno = custno; 
+        this.custname = custname; 
+        this.contactnumber = contactnumber; 
+        this.custaddr = custaddr; 
+    } 
+ 
+    void display() { 
+        System.out.println("Customer No: " + custno); 
+        System.out.println("Customer Name: " + custname); 
+        System.out.println("Contact Number: " + contactnumber); 
+        System.out.println("Customer Address: " + custaddr); 
+    } 
+ 
+    static void searchByContact(Customer[] customers, String contact) { 
+        boolean found = false; 
+        for (Customer c : customers) { 
+            if (c.contactnumber.equals(contact)) { 
+                c.display(); 
+                found = true; 
+                break; 
+            } 
+        } 
+        if (!found) { 
+            System.out.println("Customer not found"); 
+        } 
+    } 
+} 
+ 
+public class CustomerSearch { 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        System.out.print("Enter number of customers: "); 
+  
+        int n = sc.nextInt(); 
+        sc.nextLine(); 
+        Customer[] customers = new Customer[n]; 
+        for (int i = 0; i < n; i++) { 
+            System.out.println("Enter details for Customer " + (i + 1) + ":"); 
+            System.out.print("Customer No: "); 
+            int custno = sc.nextInt(); 
+            sc.nextLine(); 
+            System.out.print("Customer Name: "); 
+            String custname = sc.nextLine(); 
+            System.out.print("Contact Number: "); 
+            String contactnumber = sc.nextLine(); 
+            System.out.print("Customer Address: "); 
+            String custaddr = sc.nextLine(); 
+            customers[i] = new Customer(custno, custname, contactnumber, custaddr); 
+        } 
+        System.out.print("Enter contact number to search: "); 
+        String contact = sc.nextLine(); 
+        Customer.searchByContact(customers, contact); 
+    } 
+} 
