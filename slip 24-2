@@ -1,0 +1,45 @@
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+
+public class ConcentricCirclesFrame extends JFrame {
+
+    private int centerX = -100;
+    private int centerY = -100;
+
+    public ConcentricCirclesFrame() {
+        setTitle("Concentric Circles");
+        setSize(500, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                centerX = e.getX();
+                centerY = e.getY();
+                repaint();
+            }
+        });
+
+        setVisible(true);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+
+        g.setColor(Color.DARK_GRAY);
+        g.fillOval(centerX - 75, centerY - 75, 150, 150);
+
+        g.setColor(Color.GRAY);
+        g.fillOval(centerX - 50, centerY - 50, 100, 100);
+
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillOval(centerX - 25, centerY - 25, 50, 50);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ConcentricCirclesFrame::new);
+    }
+}
