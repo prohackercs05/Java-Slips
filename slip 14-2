@@ -1,0 +1,90 @@
+// File: SY/SYMarks.java 
+package SY; 
+ 
+public class SYMarks { 
+    public int ComputerTotal, MathsTotal, ElectronicsTotal; 
+    public SYMarks(int c, int m, int e) { 
+        ComputerTotal = c; 
+        MathsTotal = m; 
+        ElectronicsTotal = e; 
+    } 
+} 
+ 
+
+// File: TY/TYMarks.java 
+package TY; 
+ 
+public class TYMarks { 
+    public int Theory, Practicals; 
+    public TYMarks(int t, int p) { 
+        Theory = t; 
+        Practicals = p; 
+    } 
+} 
+ 
+
+// File: StudentResult.java 
+import SY.SYMarks; 
+import TY.TYMarks; 
+import java.util.*; 
+ 
+class Student { 
+    int rollNumber; 
+    String name; 
+    SYMarks sy; 
+    TYMarks ty; 
+ 
+    Student(int r, String n, SYMarks s, TYMarks t) { 
+        rollNumber = r; 
+        name = n; 
+        sy = s; 
+        ty = t; 
+    } 
+ 
+    int totalComputerMarks() { 
+        return sy.ComputerTotal + ty.Theory + ty.Practicals; 
+    } 
+ 
+    String grade() { 
+  
+        int total = totalComputerMarks(); 
+        if (total >= 70) return "A"; 
+        else if (total >= 60) return "B"; 
+        else if (total >= 50) return "C"; 
+        else if (total >= 40) return "Pass Class"; 
+        else return "FAIL"; 
+    } 
+ 
+    void display() { 
+        System.out.println("Roll No: " + rollNumber + " Name: " + name); 
+        System.out.println("SY Computer: " + sy.ComputerTotal +  
+                           " TY Theory: " + ty.Theory +  
+                           " TY Practicals: " + ty.Practicals); 
+        System.out.println("Total Computer Marks: " + totalComputerMarks()); 
+        System.out.println("Grade: " + grade()); 
+        System.out.println("----------------------------"); 
+    } 
+} 
+ 
+public class StudentResult { 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        System.out.print("Enter number of students: "); 
+        int n = sc.nextInt(); 
+        Student[] students = new Student[n]; 
+        for (int i = 0; i < n; i++) { 
+            System.out.print("Enter Roll Number: "); 
+            int r = sc.nextInt(); 
+            System.out.print("Enter Name: "); 
+            String nm = sc.next(); 
+            System.out.print("Enter SY Marks (Comp, Maths, Elec): "); 
+            int c = sc.nextInt(), m = sc.nextInt(), e = sc.nextInt(); 
+            System.out.print("Enter TY Marks (Theory, Practicals): "); 
+            int t = sc.nextInt(), p = sc.nextInt(); 
+            students[i] = new Student(r, nm, new SYMarks(c, m, e), new TYMarks(t, p)); 
+        } 
+        for (Student s : students) { 
+            s.display(); 
+        } 
+    } 
+}
