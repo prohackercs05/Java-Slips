@@ -1,0 +1,23 @@
+import java.util.Scanner; 
+ 
+@FunctionalInterface 
+interface Cube { 
+    int calculate(int x); 
+} 
+ 
+public class CubeOfNumber { 
+    public static void main(String[] args) { 
+        Scanner scanner = new Scanner(System.in); 
+         
+        System.out.print("Enter a number: "); 
+        int number = scanner.nextInt(); 
+         
+        Cube cube = (x) -> x * x * x; 
+         
+        int result = cube.calculate(number); 
+         
+        System.out.println("The cube of " + number + " is: " + result); 
+         
+        scanner.close(); 
+    } 
+}
