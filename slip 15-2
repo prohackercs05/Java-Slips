@@ -1,0 +1,60 @@
+class Account { 
+    String custname; 
+    int accno; 
+ 
+    Account() { 
+        custname = "Unknown"; 
+        accno = 0; 
+    } 
+ 
+    Account(String name, int no) { 
+        custname = name; 
+        accno = no; 
+    } 
+} 
+ 
+  
+ 
+class SavingAccount extends Account { 
+    double savingbal; 
+    double minbal; 
+ 
+    SavingAccount() { 
+        super(); 
+        savingbal = 0; 
+        minbal = 1000; 
+    } 
+ 
+    SavingAccount(String name, int no, double bal, double min) { 
+        super(name, no); 
+        savingbal = bal; 
+        minbal = min; 
+    } 
+} 
+ 
+class AccountDetail extends SavingAccount { 
+    double depositamt; 
+    double withdrawalamt; 
+ 
+    AccountDetail(String name, int no, double bal, double min, double deposit, double 
+withdraw) { 
+        super(name, no, bal, min); 
+        depositamt = deposit; 
+        withdrawalamt = withdraw; 
+        savingbal = savingbal + depositamt - withdrawalamt; 
+    } 
+ 
+    void display() { 
+        System.out.println("Customer Name: " + custname); 
+        System.out.println("Account No: " + accno); 
+        System.out.println("Balance: " + savingbal); 
+        System.out.println("Minimum Balance: " + minbal); 
+    } 
+} 
+ 
+public class MainAccount { 
+    public static void main(String[] args) { 
+        AccountDetail ad = new AccountDetail("Rahul", 101, 5000, 1000, 1500, 2000); 
+        ad.display(); 
+    } 
+}
