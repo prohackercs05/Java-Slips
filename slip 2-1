@@ -1,0 +1,31 @@
+public class BMICalculator {
+    public static void main(String[] args) {
+        if (args.length != 4) {
+            System.out.println("Usage: java BMICalculator <Chetan> <Mahajan> <50> <1.76784>");
+            return;
+        }
+
+        String firstName = args[0];
+        String lastName = args[1];
+        double weight;
+        double height;
+
+        try {
+            weight = Double.parseDouble(args[2]);
+            height = Double.parseDouble(args[3]);
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter valid numbers for weight and height.");
+            return;
+        }
+
+        if (height <= 0 || weight <= 0) {
+            System.out.println("Weight and height must be positive numbers.");
+            return;
+        }
+
+        double bmi = weight / (height * height);
+
+        System.out.println("Person's Name: " + firstName + " " + lastName);
+        System.out.printf("BMI Index: %.2f\n", bmi);
+    }
+}
