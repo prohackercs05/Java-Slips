@@ -1,0 +1,36 @@
+package Operation; 
+ 
+public class Addition { 
+    public int add(int a, int b) { 
+        return a + b; 
+    } 
+ 
+    public float subtract(float x, float y) { 
+        return x - y; 
+    } 
+} 
+ 
+package Operation; 
+ 
+public class Maximum { 
+    public int max(int a, int b) { 
+        return (a > b) ? a : b; 
+    } 
+} 
+ 
+ 
+import Operation.Addition; 
+import Operation.Maximum; 
+ 
+public class Test { 
+    public static void main(String[] args) { 
+        Addition obj1 = new Addition(); 
+        System.out.println(obj1.add(10, 20)); 
+        System.out.println(obj1.subtract(10.5f, 4.2f)); 
+ 
+        Maximum obj2 = new Maximum(); 
+        System.out.println(obj2.max(25, 30)); 
+    } 
+} 
+``` 
+ 
