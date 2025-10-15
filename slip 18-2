@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+class CricketPlayer {
+    String name;
+    int no_of_innings;
+    int no_of_times_notout;
+    int totalruns;
+    double bat_avg;
+
+    CricketPlayer(String name, int no_of_innings, int no_of_times_notout, int totalruns) {
+        this.name = name;
+        this.no_of_innings = no_of_innings;
+        this.no_of_times_notout = no_of_times_notout;
+        this.totalruns = totalruns;
+        this.bat_avg = 0.0;
+    }
+
+    static void avg(CricketPlayer[] players) {
+        for (CricketPlayer p : players) {
+            int outs = p.no_of_innings - p.no_of_times_notout;
+            p.bat_avg = (outs > 0) ? (double) p.totalruns / outs : p.totalruns;
+        }
+    }
+
+    static void sort(CricketPlayer[] players) {
+        for (int i = 0; i < players.length - 1; i++) {
+            for (int j = 0; j < players.length - i - 1; j++) {
+                if (players[j].bat_avg > players[j + 1].bat_avg) {
+                    CricketPlayer temp = players[j];
+                    players[j] = players[j + 1];
+                    players[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    void display() {
+        System.out.printf("%s %d %d %d %.2f%n", name, no_of_innings, no_of_times_notout, totalruns, bat_avg);
+    }
+}
+
+public class CricketPlayerDetails {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        CricketPlayer[] players = new CricketPlayer[n];
+
+        for (int i = 0; i < n; i++) {
+            String name = sc.nextLine();
+            int innings = sc.nextInt();
+            int notOut = sc.nextInt();
+            int runs = sc.nextInt();
+            sc.nextLine(); 
+            players[i] = new CricketPlayer(name, innings, notOut, runs);
+        }
+
+        CricketPlayer.avg(players);
+        CricketPlayer.sort(players);
+
+        for (CricketPlayer p : players) {
+            p.display();
+        }
+
+        sc.close();
+    }
+}
