@@ -1,0 +1,29 @@
+import java.io.*; 
+ 
+public class FileWordLineCount { 
+    public static void main(String[] args) { 
+        if (args.length != 1) { 
+            System.out.println("Usage: java FileWordLineCount <Filename>"); 
+            return; 
+        } 
+        File file = new File(args[0]); 
+        if (!file.exists()) { 
+            System.out.println("File does not exist."); 
+            return; 
+        } 
+        int lineCount = 0, wordCount = 0; 
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) { 
+            String line; 
+            while ((line = br.readLine()) != null) { 
+                lineCount++; 
+                String[] words = line.trim().split("\\s+"); 
+                if (!line.trim().isEmpty()) 
+                    wordCount += words.length; 
+            } 
+        } catch (IOException e) { 
+            System.out.println("Error reading file."); 
+        } 
+        System.out.println("Lines: " + lineCount); 
+        System.out.println("Words: " + wordCount); 
+    } 
+} 
