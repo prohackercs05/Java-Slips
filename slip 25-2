@@ -1,0 +1,85 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class UserInfoGUI extends JFrame implements ActionListener {
+    JTextField nameField, resultField;
+    JRadioButton fy, sy, ty;
+    JCheckBox music, dance, sports;
+    JButton submit;
+    ButtonGroup grp;
+
+    public UserInfoGUI() {
+        setTitle("User Information");
+        setSize(450, 350);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        JPanel top = new JPanel();
+        top.add(new JLabel("Your Name"));
+        nameField = new JTextField(20);
+        top.add(nameField);
+
+        JPanel centerPanel = new JPanel(new GridLayout(1, 2));
+
+        JPanel classPanel = new JPanel();
+        classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.Y_AXIS));
+        classPanel.setBorder(BorderFactory.createTitledBorder("Your Class"));
+
+        fy = new JRadioButton("FY");
+        sy = new JRadioButton("SY");
+        ty = new JRadioButton("TY");
+
+        grp = new ButtonGroup();
+        grp.add(fy);
+        grp.add(sy);
+        grp.add(ty);
+
+        classPanel.add(fy);
+        classPanel.add(sy);
+        classPanel.add(ty);
+
+        JPanel hobbyPanel = new JPanel();
+        hobbyPanel.setLayout(new BoxLayout(hobbyPanel, BoxLayout.Y_AXIS));
+        hobbyPanel.setBorder(BorderFactory.createTitledBorder("Your Hobbies"));
+
+        music = new JCheckBox("Music");
+        dance = new JCheckBox("Dance");
+        sports = new JCheckBox("Sports");
+
+        hobbyPanel.add(music);
+        hobbyPanel.add(dance);
+        hobbyPanel.add(sports);
+
+        centerPanel.add(classPanel);
+        centerPanel.add(hobbyPanel);
+
+        JPanel bottom = new JPanel(new BorderLayout());
+        submit = new JButton("Submit");
+        submit.addActionListener(this);
+
+        resultField = new JTextField();
+        resultField.setEditable(false);
+
+        bottom.add(submit, BorderLayout.NORTH);
+        bottom.add(resultField, BorderLayout.CENTER);
+
+        add(top, BorderLayout.NORTH);
+        add(centerPanel, BorderLayout.CENTER);
+        add(bottom, BorderLayout.SOUTH);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String cls = fy.isSelected() ? "FY" : sy.isSelected() ? "SY" : ty.isSelected() ? "TY" : "";
+        String hob = (music.isSelected() ? "Music " : "")
+                   + (dance.isSelected() ? "Dance " : "")
+                   + (sports.isSelected() ? "Sports" : "");
+        resultField.setText("Name---" + nameField.getText() + ", Class---" + cls + ", Hobbies---" + hob.trim());
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(UserInfoGUI::new);
+    }
+}
