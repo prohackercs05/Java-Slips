@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+class InvalidDateException extends Exception {
+    InvalidDateException(String msg) {
+        super(msg);
+    }
+}
+
+class MyDate {
+    int day, month, year;
+
+    void accept(int d, int m, int y) throws InvalidDateException {
+        if (!isValid(d, m, y)) throw new InvalidDateException("Invalid Date");
+        day = d;
+        month = m;
+        year = y;
+    }
+
+    boolean isValid(int d, int m, int y) {
+        if (y < 1 || m < 1 || m > 12 || d < 1) return false;
+        int[] daysInMonth = {31, (isLeap(y) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        return d <= daysInMonth[m - 1];
+    }
+
+    boolean isLeap(int y) {
+        return (y % 400 == 0) || (y % 4 == 0 && y % 100 != 0);
+    }
+
+    void display() {
+        System.out.println(day + "/" + month + "/" + year);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        MyDate date = new MyDate();
+        try {
+            System.out.print("Enter day: ");
+            int d = Integer.parseInt(sc.nextLine().trim());
+            System.out.print("Enter month: ");
+            int m = Integer.parseInt(sc.nextLine().trim());
+            System.out.print("Enter year: ");
+            int y = Integer.parseInt(sc.nextLine().trim());
+
+            date.accept(d, m, y);
+            date.display();
+        } catch (InvalidDateException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter numeric values only.");
+        }
+        sc.close();
+    }
+}
