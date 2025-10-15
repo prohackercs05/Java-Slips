@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+class InvalidPasswordException extends Exception {
+    public InvalidPasswordException(String message) {
+        super(message);
+    }
+}
+
+public class UserAuth {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = sc.nextLine();
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+
+        try {
+            if (!username.equals(password)) {
+                throw new InvalidPasswordException("Invalid Password: username and password must be same");
+            }
+            System.out.println("Login successful");
+        } catch (InvalidPasswordException e) {
+            System.out.println(e.getMessage());
+        }
+
+        sc.close();
+    }
+}
