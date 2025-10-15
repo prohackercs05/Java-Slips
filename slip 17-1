@@ -1,0 +1,78 @@
+import java.util.Scanner; 
+ 
+class Customer { 
+    String name; 
+    String phoneNumber; 
+ 
+    void readData(Scanner sc) { 
+        System.out.print("Enter name: "); 
+        name = sc.nextLine(); 
+        System.out.print("Enter phone number: "); 
+        phoneNumber = sc.nextLine(); 
+    } 
+ 
+    void displayData() { 
+        System.out.println("Name: " + name); 
+        System.out.println("Phone Number: " + phoneNumber); 
+    } 
+} 
+ 
+class Depositor extends Customer { 
+    String accNo; 
+    double balance; 
+ 
+    void readData(Scanner sc) { 
+        super.readData(sc); 
+        System.out.print("Enter account number: "); 
+        accNo = sc.nextLine(); 
+        System.out.print("Enter balance: "); 
+        balance = sc.nextDouble(); 
+        sc.nextLine(); 
+    } 
+ 
+    void displayData() { 
+        super.displayData(); 
+        System.out.println("Account Number: " + accNo); 
+        System.out.println("Balance: " + balance); 
+    } 
+} 
+  
+class Borrower extends Depositor { 
+    String loanNo; 
+    double loanAmt; 
+ 
+    void readData(Scanner sc) { 
+        super.readData(sc); 
+        System.out.print("Enter loan number: "); 
+        loanNo = sc.nextLine(); 
+        System.out.print("Enter loan amount: "); 
+        loanAmt = sc.nextDouble(); 
+        sc.nextLine(); 
+    } 
+ 
+    void displayData() { 
+        super.displayData(); 
+        System.out.println("Loan Number: " + loanNo); 
+        System.out.println("Loan Amount: " + loanAmt); 
+    } 
+} 
+ 
+public class CustomerDetails { 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        System.out.print("Enter number of customers: "); 
+        int n = sc.nextInt(); 
+        sc.nextLine(); 
+        Borrower[] customers = new Borrower[n]; 
+        for (int i = 0; i < n; i++) { 
+            customers[i] = new Borrower(); 
+            System.out.println("\nEnter details of customer " + (i + 1)); 
+            customers[i].readData(sc); 
+        } 
+        for (int i = 0; i < n; i++) { 
+            System.out.println("\nDetails of customer " + (i + 1)); 
+            customers[i].displayData(); 
+        } 
+        sc.close(); 
+    } 
+}
