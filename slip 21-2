@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+class Employee1 {
+    int id;
+    String name;
+    String deptname;
+    double salary;
+    static int count = 0;
+
+    Employee1() {
+        this.id = 0;
+        this.name = "";
+        this.deptname = "";
+        this.salary = 0.0;
+        count++;
+    }
+
+    Employee1(int id, String name, String deptname, double salary) {
+        this.id = id;
+        this.name = name;
+        this.deptname = deptname;
+        this.salary = salary;
+        count++;
+    }
+
+    static int getCount() {
+        return count;
+    }
+
+    void display() {
+        System.out.println("ID: " + id + ", Name: " + name + ", Dept: " + deptname + ", Salary: " + salary);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of employees: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Enter Department: ");
+            String dept = sc.nextLine();
+
+            System.out.print("Enter Salary: ");
+            double sal = sc.nextDouble();
+            sc.nextLine();
+
+            Employee1 e = new Employee1(id, name, dept, sal);
+            e.display();
+            System.out.println("Object Count: " + Employee1.getCount());
+            System.out.println();
+        }
+
+        sc.close();
+    }
+}
