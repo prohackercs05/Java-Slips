@@ -1,0 +1,70 @@
+import java.awt.*;
+import java.awt.event.*;
+
+class MouseEventDemo1 extends Frame {
+    String msg = "";
+
+    MouseEventDemo1() {
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                msg = "Mouse Clicked";
+                repaint();
+            }
+
+            public void mousePressed(MouseEvent e) {
+                msg = "Mouse Pressed";
+                repaint();
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                msg = "Mouse Released";
+                repaint();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                msg = "Mouse Entered";
+                repaint();
+            }
+
+            public void mouseExited(MouseEvent e) {
+                msg = "Mouse Exited";
+                repaint();
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseMoved(MouseEvent e) {
+                msg = "Mouse Moved";
+                repaint();
+            }
+
+            public void mouseDragged(MouseEvent e) {
+                msg = "Mouse Dragged";
+                repaint();
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+            }
+        });
+
+        setTitle("Mouse Event Demo");
+        setSize(400, 400);
+        setVisible(true);
+    }
+
+    public void paint(Graphics g) {
+        g.setColor(Color.red);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        FontMetrics fm = g.getFontMetrics();
+        int x = (getWidth() - fm.stringWidth(msg)) / 2;
+        int y = getHeight() / 2;
+        g.drawString(msg, x, y);
+    }
+
+    public static void main(String[] args) {
+        new MouseEventDemo1();
+    }
+}
