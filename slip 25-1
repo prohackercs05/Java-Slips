@@ -1,0 +1,48 @@
+import java.io.*; 
+ 
+class Student { 
+    int rollno; 
+    String name; 
+    String className; 
+    double per; 
+ 
+    Student(int rollno, String name, String className, double per) { 
+        this.rollno = rollno; 
+        this.name = name; 
+        this.className = className; 
+        this.per = per; 
+    } 
+ 
+    void display() { 
+        System.out.println("Roll No: " + rollno); 
+        System.out.println("Name: " + name); 
+        System.out.println("Class: " + className); 
+        System.out.println("Percentage: " + per); 
+        System.out.println(); 
+    } 
+ 
+    public static void main(String[] args) throws IOException { 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+        System.out.print("Enter number of students: "); 
+        int n = Integer.parseInt(br.readLine()); 
+        Student[] students = new Student[n]; 
+        for (int i = 0; i < n; i++) { 
+            System.out.println("Enter details of student " + (i + 1)); 
+            System.out.print("Enter Roll No: "); 
+            int rollno = Integer.parseInt(br.readLine()); 
+            System.out.print("Enter Name: "); 
+            String name = br.readLine(); 
+            System.out.print("Enter Class: "); 
+            String className = br.readLine(); 
+            System.out.print("Enter Percentage: "); 
+            double per = Double.parseDouble(br.readLine()); 
+            students[i] = new Student(rollno, name, className, per); 
+        } 
+        System.out.println("\n--- Student Details ---"); 
+ 
+  
+        for (Student s : students) { 
+            s.display(); 
+        } 
+    } 
+} 
