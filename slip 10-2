@@ -1,0 +1,42 @@
+interface Marker {} 
+class Product implements Marker { 
+    int product_id; 
+    String product_name; 
+    double product_cost; 
+    int product_quantity; 
+    static int count = 0; 
+    Product() { 
+        product_id = 0; 
+        product_name = ""; 
+        product_cost = 0.0; 
+        product_quantity = 0; 
+        count++; 
+    } 
+    Product(int id, String name, double cost, int quantity) { 
+        this.product_id = id; 
+        this.product_name = name; 
+        this.product_cost = cost; 
+        this.product_quantity = quantity; 
+        count++; 
+    } 
+    void display() { 
+        System.out.println("Product ID: " + product_id); 
+        System.out.println("Product Name: " + product_name); 
+        System.out.println("Product Cost: " + product_cost); 
+        System.out.println("Product Quantity: " + product_quantity); 
+        System.out.println(); 
+    } 
+    static int getCount() { 
+        return count; 
+    } 
+} 
+public class Main { 
+    public static void main(String[] args) { 
+        Product p1 = new Product(); 
+        Product p2 = new Product(101, "Laptop", 45000.50, 5); 
+        Product p3 = new Product(102, "Phone", 15000.75, 10); 
+      p1.display(); 
+        p2.display(); 
+        p3.display(); 
+       System.out.println("Total number of Product objects: " + Product.getCount()); 
+    } }
