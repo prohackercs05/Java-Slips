@@ -1,0 +1,41 @@
+import java.util.Scanner; 
+ 
+class Person { 
+    String personName; 
+    String aadharNo; 
+    String panNo; 
+ 
+    Person(String personName, String aadharNo, String panNo) { 
+        this.personName = personName; 
+        this.aadharNo = aadharNo; 
+        this.panNo = panNo; 
+    } 
+ 
+    void display() { 
+        System.out.println("Person Name: " + this.personName); 
+        System.out.println("Aadhar Number: " + this.aadharNo); 
+        System.out.println("PAN Number: " + this.panNo); 
+    } 
+} 
+ 
+public class PersonDemo { 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        Person[] persons = new Person[5]; 
+        for (int i = 0; i < 5; i++) { 
+            System.out.println("Enter details for Person " + (i + 1) + ":"); 
+            System.out.print("Name: "); 
+            String name = sc.nextLine(); 
+            System.out.print("Aadhar Number: "); 
+            String aadhar = sc.nextLine(); 
+            System.out.print("PAN Number: "); 
+            String pan = sc.nextLine(); 
+            persons[i] = new Person(name, aadhar, pan); 
+        } 
+        System.out.println("\nPerson Information:"); 
+        for (Person p : persons) { 
+            p.display(); 
+            System.out.println("-------------------"); 
+        } 
+    } 
+} 
