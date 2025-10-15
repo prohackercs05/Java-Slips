@@ -1,0 +1,74 @@
+import java.util.Scanner; 
+ 
+public class MatrixMenu { 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        while (true) { 
+            System.out.println("1. Addition"); 
+            System.out.println("2. Multiplication"); 
+            System.out.println("3. Exit"); 
+            int choice = sc.nextInt(); 
+            if (choice == 3) break; 
+ 
+            System.out.println("Enter rows and columns of first matrix:"); 
+            int r1 = sc.nextInt(); 
+            int c1 = sc.nextInt(); 
+            int[][] m1 = new int[r1][c1]; 
+            System.out.println("Enter first matrix:"); 
+            for (int i = 0; i < r1; i++) 
+                for (int j = 0; j < c1; j++) 
+                    m1[i][j] = sc.nextInt(); 
+ 
+            System.out.println("Enter rows and columns of second matrix:"); 
+            int r2 = sc.nextInt(); 
+            int c2 = sc.nextInt(); 
+            int[][] m2 = new int[r2][c2]; 
+            System.out.println("Enter second matrix:"); 
+            for (int i = 0; i < r2; i++) 
+                for (int j = 0; j < c2; j++) 
+                    m2[i][j] = sc.nextInt(); 
+ 
+            if (choice == 1) { 
+                if (r1 != r2 || c1 != c2) { 
+                    System.out.println("Addition not possible"); 
+                } else { 
+                    int[][] sum = new int[r1][c1]; 
+                    for (int i = 0; i < r1; i++) 
+                        for (int j = 0; j < c1; j++) 
+                            sum[i][j] = m1[i][j] + m2[i][j]; 
+                    System.out.println("Sum:"); 
+                    printMatrix(sum); 
+                } 
+            } else if (choice == 2) { 
+                if (c1 != r2) { 
+                    System.out.println("Multiplication not possible");
+
+                     } else { 
+                    int[][] prod = new int[r1][c2]; 
+                    for (int i = 0; i < r1; i++) { 
+                        for (int j = 0; j < c2; j++) { 
+                            prod[i][j] = 0; 
+                            for (int k = 0; k < c1; k++) 
+                                prod[i][j] += m1[i][k] * m2[k][j]; 
+                        } 
+                    } 
+                    System.out.println("Product:"); 
+                    printMatrix(prod); 
+                } 
+            } else { 
+                System.out.println("Invalid choice"); 
+            } 
+        } 
+        sc.close(); 
+    } 
+ 
+    static void printMatrix(int[][] mat) { 
+        for (int[] row : mat) { 
+            for (int val : row) 
+                System.out.print(val + " "); 
+            System.out.println(); 
+        } 
+    } 
+} 
+ 
+ 
