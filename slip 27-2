@@ -1,0 +1,46 @@
+import java.io.*; 
+import java.util.Scanner; 
+public class FileDirectoryCheck { 
+    public static void main(String[] args) throws IOException { 
+        if(args.length == 0) { 
+  
+            System.out.println("Please provide a file or directory path"); 
+            return; 
+        } 
+      File f = new File(args[0]); 
+        Scanner sc = new Scanner(System.in); 
+        if(f.isDirectory()) { 
+            File[] files = f.listFiles((dir, name) -> name.endsWith(".txt")); 
+            if(files == null || files.length == 0) { 
+                System.out.println("No text files to delete."); 
+                sc.close(); 
+                return; 
+            } 
+            System.out.println("Confirm delete all text files in directory (yes/no):"); 
+            String confirm = sc.nextLine(); 
+            int countDeleted = 0; 
+            if(confirm.equalsIgnoreCase("yes")) { 
+                for(File file : files) { 
+                    if(file.delete()) { 
+                        countDeleted++; 
+                    } 
+                } 
+            } 
+            System.out.println("Number of files deleted: " + countDeleted); 
+        } else if(f.isFile()) { 
+            System.out.println("File details:"); 
+            System.out.println("Name: " + f.getName()); 
+            System.out.println("Path: " + f.getPath()); 
+            System.out.println("Absolute Path: " + f.getAbsolutePath()); 
+            System.out.println("Parent: " + f.getParent()); 
+            System.out.println("Writable: " + f.canWrite()); 
+            System.out.println("Readable: " + f.canRead()); 
+            System.out.println("File size in bytes: " + f.length()); 
+            System.out.println("Last modified: " + f.lastModified()); 
+        } else { 
+            System.out.println("Given path is neither file nor directory or does not exist."); 
+        } 
+        sc.close(); 
+    } 
+} 
+ 
