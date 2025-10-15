@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.ArrayList;
+
+class Donor implements Serializable {
+    String name;
+    int age;
+    String address;
+    String contactnumber;
+    String bloodgroup;
+    String dateOfLastDonation;
+
+    Donor(String name, int age, String address, String contactnumber, String bloodgroup, String dateOfLastDonation) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.contactnumber = contactnumber;
+        this.bloodgroup = bloodgroup;
+        this.dateOfLastDonation = dateOfLastDonation;
+    }
+
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Address: " + address);
+        System.out.println("Contact: " + contactnumber);
+        System.out.println("Blood Group: " + bloodgroup);
+        System.out.println("Last Donation Date: " + dateOfLastDonation);
+        System.out.println();
+    }
+}
+
+public class DonorManager {
+    static final String filename = "donors.dat";
+
+    static void writeDonorsToFile(ArrayList<Donor> donors) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+            oos.writeObject(donors);
+        }
+    }
+
+    static ArrayList<Donor> readDonorsFromFile() throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            return (ArrayList<Donor>) ois.readObject();
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Donor> donors = new ArrayList<>();
+        donors.add(new Donor("Alice", 30, "123 Street", "1234567890", "A+", "2023-06-01"));
+        donors.add(new Donor("Bob", 40, "456 Avenue", "0987654321", "B-", "2023-05-15"));
+
+        try {
+            writeDonorsToFile(donors);
+            ArrayList<Donor> loadedDonors = readDonorsFromFile();
+
+            for (Donor d : loadedDonors) {
+                d.display();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
